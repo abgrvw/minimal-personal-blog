@@ -1,6 +1,6 @@
 # 静态个人博客
 
-零依赖静态个人站：单栏窄排版、头像 + 姓名、日记板块，深浅主题自适应。页面运行时读取 `content.json` 渲染。
+零依赖静态个人站：单栏窄排版、姓名 + 日记板块，深浅主题自适应。页面运行时读取 `content.json` 渲染。
 
 **线上地址（Vercel 免费域名）：** https://abgrvw.vercel.app
 **GitHub 仓库：** https://github.com/abgrvw/minimal-personal-blog
@@ -39,7 +39,7 @@ slug: my-post
 
 ## 改站点信息
 
-首页只显示头像、站点名（`siteName`）和日记列表；`content.json` 里的 `bio` / `quote` / `social` / `albums` 目前不会展示。名字和头像在 `content.json` 里改（GitHub 网页点 ✏️ 编辑），提交后 Vercel 自动部署。由 Issue 生成的文章会在每次同步时重新写入，不要在 `content.json` 里手改它们；原有手工文章会保留。
+首页只显示站点名（`siteName`）和日记列表；`content.json` 里的 `avatar` / `bio` / `quote` / `social` / `albums` 目前不会展示。站点名在 `content.json` 里改（GitHub 网页点 ✏️ 编辑），提交后 Vercel 自动部署。由 Issue 生成的文章会在每次同步时重新写入，不要在 `content.json` 里手改它们；原有手工文章会保留。
 
 ## 目录结构
 
