@@ -39,7 +39,7 @@ slug: my-post
 
 ## 改站点信息
 
-首页只显示站点名（`siteName`）和日记列表；`content.json` 里的 `avatar` / `bio` / `quote` / `social` / `albums` 目前不会展示。站点名在 `content.json` 里改（GitHub 网页点 ✏️ 编辑），提交后 Vercel 自动部署。由 Issue 生成的文章会在每次同步时重新写入，不要在 `content.json` 里手改它们；原有手工文章会保留。
+首页只显示站点名（`siteName`）和日记列表；`content.json` 里的 `avatar` / `bio` / `quote` / `social` / `albums` 目前不会展示。站点名在 `content.json` 里改（GitHub 网页点 ✏️ 编辑），提交后 Vercel 自动部署。日记列表完全由带 `blog` 标签的 Issue 生成；`content.json` 里的 `writings` 会在每次同步时被覆盖，手工写入的文章会被清掉。
 
 ## 目录结构
 
