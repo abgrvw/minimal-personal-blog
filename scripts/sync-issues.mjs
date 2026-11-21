@@ -6,6 +6,7 @@
  *   - Closing the issue or adding `draft` => post is removed from the site.
  *   - Title -> post title, body -> Markdown article body.
  *   - Optional first line `slug: my-custom-slug` overrides the URL slug.
+ *   - Issue labels other than `blog`/`draft` become post tags.
  *   - Only Issue-generated posts are kept; manual entries in content.json are dropped.
  */
 import fs from 'node:fs';
@@ -27,6 +28,14 @@ function labelNames(issue) {
   }).map(function (n) { return String(n || '').toLowerCase(); });
 }
 
+function tagNames(issue) {
+  var reserved = { blog: true, draft: true };
+  return (issue.labels || []).map(function (l) {
+    return typeof l === 'string' ? l : l.name;
+  }).map(function (n) { return String(n || '').trim(); })
+    .filter(function (n) { return n && !reserved[n.toLowerCase()]; });
+}
+
 function readingMinutes(body) {
   const text = String(body || '');
   const cjk = (text.match(/[\u3400-\u9fff]/g) || []).length;
@@ -45,6 +54,7 @@ function toPost(issue) {
     title: String(issue.title || 'Untitled').trim(),
     date: String(issue.created_at || '').slice(0, 10) + ' · ' + readingMinutes(body) + ' min read',
     body: body,
+    tags: tagNames(issue),
     issueNumber: issue.number,
     issueUrl: issue.html_url
   };
