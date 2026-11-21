@@ -127,15 +127,44 @@ function profileUrl(kind, value) {
   return v;
 }
 
-function renderHome(data) {
-  var writings = (data.writings || []).map(function (w) {
+function tagsOf(post) {
+  return (post && post.tags) || [];
+}
+
+function renderHome(data, activeTag) {
+  var posts = data.writings || [];
+  var allTags = [];
+  posts.forEach(function (w) {
+    tagsOf(w).forEach(function (t) {
+      if (allTags.indexOf(t) === -1) allTags.push(t);
+    });
+  });
+
+  var tagBar = '';
+  if (allTags.length) {
+    var chips = ['<button type="button" class="tag-chip' + (!activeTag ? ' is-active' : '')
+      + '" data-tag="">全部</button>'];
+    allTags.forEach(function (t) {
+      chips.push('<button type="button" class="tag-chip' + (activeTag === t ? ' is-active' : '')
+        + '" data-tag="' + esc(t) + '">' + esc(t) + '</button>');
+    });
+    tagBar = '<div class="tag-bar" data-tag-bar>' + chips.join('') + '</div>';
+  }
+
+  var writings = posts.filter(function (w) {
+    return !activeTag || tagsOf(w).indexOf(activeTag) !== -1;
+  }).map(function (w) {
     return '<li><a href="post.html?slug=' + encodeURIComponent(w.slug || '') + '">'
       + esc(w.title) + '</a></li>';
   }).join('');
 
   return ''
     + '<h1>' + esc(data.siteName) + '</h1>'
-    + '<section id="writings"><h2 class="h-writings">日记</h2><ul class="link-list">' + writings + '</ul></section>';
+    + '<section id="writings"><h2 class="h-writings">日记</h2>'
+    + tagBar
+    + '<ul class="link-list" data-writings>' + writings + '</ul>'
+    + (activeTag && !writings ? '<p class="tag-empty">这个标签下还没有日记。</p>' : '')
+    + '</section>';
 }
 
 function renderPost(data, slug) {
@@ -144,10 +173,15 @@ function renderPost(data, slug) {
     return '<a class="back-link" href="index.html">← Back</a><h1>Not found</h1>'
       + '<p class="meta">这篇文章不存在，请从首页重新进入。</p>';
   }
+  var tags = tagsOf(post).map(function (t) {
+    return '<a class="post-tag" href="index.html?tag=' + encodeURIComponent(t) + '">'
+      + esc(t) + '</a>';
+  }).join('');
   return ''
     + '<a class="back-link" href="index.html">← Back</a>'
     + '<article><h1>' + esc(post.title) + '</h1>'
     + '<p class="meta">' + esc(post.date) + '</p>'
+    + (tags ? '<div class="post-tags">' + tags + '</div>' : '')
     + markdownBlocks(post.body).join('\n')
     + '</article>';
 }
@@ -182,10 +216,11 @@ function renderAll(data, page, slug) {
   }
 
   var app = document.getElementById('app');
+  var activeTag = new URLSearchParams(location.search).get('tag') || '';
   if (app) {
     if (page === 'post') app.innerHTML = renderPost(data, slug);
     else if (page === 'photos') app.innerHTML = renderPhotos(data);
-    else app.innerHTML = renderHome(data);
+    else app.innerHTML = renderHome(data, activeTag);
   }
 
   var footer = document.querySelector('[data-footer]');
