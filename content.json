@@ -10,6 +10,14 @@
   },
   "writings": [
     {
+      "slug": "workflow-smoke-test",
+      "title": "Workflow smoke test post (edited)",
+      "date": "2026-11-21 · 1 min read",
+      "body": "Edited body: this should replace the old content online.\n\n- update check",
+      "issueNumber": 1,
+      "issueUrl": "https://github.com/abgrvw/minimal-personal-blog/issues/1"
+    },
+    {
       "slug": "notes-on-making",
       "title": "Notes on Making Things",
       "date": "2026-11-21 · 5 min read",
