@@ -345,6 +345,62 @@ h2 {
   opacity: 0.85;
 }
 
+/* --- tags ---------------------------------------------------------- */
+
+.tag-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0 0 16px;
+}
+
+.tag-chip {
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--subtle);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px 11px;
+  cursor: pointer;
+  transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease;
+}
+
+.tag-chip:hover { color: var(--text); border-color: var(--subtle); }
+
+.tag-chip.is-active {
+  color: #fff;
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0 0 18px;
+}
+
+.post-tag {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--subtle);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px 11px;
+  text-decoration: none;
+}
+
+.post-tag:hover { color: var(--blue); border-color: var(--blue); }
+
+.tag-empty {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 8px 0 0;
+}
+
 /* --- about --------------------------------------------------------- */
 
 .bio {
