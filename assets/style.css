@@ -242,6 +242,56 @@ article ol li {
 
 article p { margin: 0 0 16px; }
 
+article h2 { font-size: 19px; margin: 30px 0 10px; }
+article h3 { font-size: 16px; margin: 24px 0 8px; }
+
+article ul {
+  padding-left: 22px;
+  margin: 0 0 16px;
+}
+
+article ul li { margin: 0 0 8px; }
+
+article blockquote {
+  margin: 0 0 18px;
+  padding: 2px 0 2px 16px;
+  border-left: 3px solid var(--line);
+  color: var(--subtle);
+}
+
+article pre {
+  background: var(--card);
+  border-radius: 4px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  margin: 0 0 18px;
+}
+
+article code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+article img {
+  max-width: 100%;
+  border-radius: 3px;
+  margin: 4px 0 18px;
+}
+
+.edit-link {
+  margin-top: 36px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+
+.edit-link a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.edit-link a:hover { color: var(--blue); text-decoration: underline; }
+
 .signature {
   text-align: right;
   color: var(--muted);

@@ -26,33 +26,69 @@
     {
       "name": "City Walks",
       "photos": [
-        { "src": "assets/photo-1.svg", "caption": "Rooftops, 18:40" },
-        { "src": "assets/photo-2.svg", "caption": "Corner store" },
-        { "src": "assets/photo-3.svg", "caption": "Crossing, rain" }
+        {
+          "src": "assets/photo-1.svg",
+          "caption": "Rooftops, 18:40"
+        },
+        {
+          "src": "assets/photo-2.svg",
+          "caption": "Corner store"
+        },
+        {
+          "src": "assets/photo-3.svg",
+          "caption": "Crossing, rain"
+        }
       ]
     },
     {
       "name": "Quiet Light",
       "photos": [
-        { "src": "assets/photo-4.svg", "caption": "Window, 07:12" },
-        { "src": "assets/photo-5.svg", "caption": "Blinds" },
-        { "src": "assets/photo-6.svg", "caption": "Last light" }
+        {
+          "src": "assets/photo-4.svg",
+          "caption": "Window, 07:12"
+        },
+        {
+          "src": "assets/photo-5.svg",
+          "caption": "Blinds"
+        },
+        {
+          "src": "assets/photo-6.svg",
+          "caption": "Last light"
+        }
       ]
     },
     {
       "name": "People Watching",
       "photos": [
-        { "src": "assets/photo-7.svg", "caption": "Two figures" },
-        { "src": "assets/photo-8.svg", "caption": "On the train" },
-        { "src": "assets/photo-9.svg", "caption": "Wait" }
+        {
+          "src": "assets/photo-7.svg",
+          "caption": "Two figures"
+        },
+        {
+          "src": "assets/photo-8.svg",
+          "caption": "On the train"
+        },
+        {
+          "src": "assets/photo-9.svg",
+          "caption": "Wait"
+        }
       ]
     },
     {
       "name": "Elsewhere",
       "photos": [
-        { "src": "assets/photo-10.svg", "caption": "Far away" },
-        { "src": "assets/photo-11.svg", "caption": "The sea" },
-        { "src": "assets/photo-12.svg", "caption": "Road, no traffic" }
+        {
+          "src": "assets/photo-10.svg",
+          "caption": "Far away"
+        },
+        {
+          "src": "assets/photo-11.svg",
+          "caption": "The sea"
+        },
+        {
+          "src": "assets/photo-12.svg",
+          "caption": "Road, no traffic"
+        }
       ]
     }
   ]
