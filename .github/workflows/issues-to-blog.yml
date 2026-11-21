@@ -10,7 +10,7 @@ permissions:
 
 concurrency:
   group: issues-to-blog
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   sync:
@@ -38,5 +38,6 @@ jobs:
           else
             git add content.json
             git commit -m "content: sync posts from GitHub Issues"
+            git pull --rebase origin main
             git push
           fi
