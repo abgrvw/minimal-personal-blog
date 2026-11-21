@@ -16,7 +16,8 @@
   }
 
   var path = location.pathname.replace(/\/+$/, '');
-  var page = /post\.html$/.test(path) ? 'post' : /photos\.html$/.test(path) ? 'photos' : 'home';
+  var page = /\/post(?:\.html)?$/.test(path) ? 'post'
+    : /\/photos(?:\.html)?$/.test(path) ? 'photos' : 'home';
   var slug = new URLSearchParams(location.search).get('slug');
 
   fetch('content.json', { cache: 'no-store' })
