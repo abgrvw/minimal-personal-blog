@@ -22,6 +22,22 @@
 
   var allData = null;
 
+  /* --- tag filtering ----------------------------------------------- */
+  function renderCurrent() {
+    renderAll(allData, page, slug);
+  }
+  document.addEventListener('click', function (e) {
+    var chip = e.target.closest ? e.target.closest('[data-tag]') : null;
+    if (!chip || page !== 'home') return;
+    e.preventDefault();
+    var tag = chip.getAttribute('data-tag') || '';
+    var url = new URL(location.href);
+    if (tag) url.searchParams.set('tag', tag);
+    else url.searchParams.delete('tag');
+    history.replaceState(null, '', url.pathname + url.search + url.hash);
+    renderCurrent();
+  });
+
   /* --- search ------------------------------------------------------ */
   function stripMarkdown(text) {
     return String(text == null ? '' : text)
@@ -118,8 +134,11 @@
       wrap.setAttribute('aria-hidden', 'true');
     }
 
-    var btn = document.querySelector('[data-search-toggle]');
-    if (btn) btn.addEventListener('click', function () { open ? hide() : show(); });
+    document.addEventListener('click', function (e) {
+      if (e.target.closest && e.target.closest('[data-search-toggle]')) {
+        open ? hide() : show();
+      }
+    });
     wrap.querySelectorAll('[data-search-close]').forEach(function (el) {
       el.addEventListener('click', hide);
     });
