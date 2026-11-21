@@ -10,6 +10,14 @@
   },
   "writings": [
     {
+      "slug": "issue-4",
+      "title": "欧控成员国及周边国家AIRAC出版核查",
+      "date": "2026-11-21 · 1 min read",
+      "body": "欧控推出的[AIRAC出版核查](https://www.eurocontrol.int/directory/national-airac-publication-review)核心是为航空用户及行业提供最新的航空信息服务发行动态，助力其掌握可能影响空中交通服务航线网络变化的信息；该服务通过实时更新，涵盖ECAC成员国及周边国家3个AIRAC周期的参考文档信息，主要是各国AIP AMDT更新情况。\n绿色表示航路之外的修订，包括进离场程序\n黄色表示ATS航路或FRA修订\n红色表示待确认\nNIL表示没有修订\n此页面可供导航数据库修订提交前参考：需核对涉及国家的修订情况，至少要确保公司AIP订阅内容与此页面一致；同时需查阅各国/地区发布的TRIGGER NOTAM，确认已获取最新修订文件更新。",
+      "issueNumber": 4,
+      "issueUrl": "https://github.com/abgrvw/minimal-personal-blog/issues/4"
+    },
+    {
       "slug": "issue-3",
       "title": "美国机场消防等级查询指南",
       "date": "2026-11-21 · 1 min read",
