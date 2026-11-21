@@ -14,6 +14,7 @@
       "title": "欧控成员国及周边国家AIRAC出版核查",
       "date": "2026-11-21 · 1 min read",
       "body": "欧控推出的[AIRAC出版核查](https://www.eurocontrol.int/directory/national-airac-publication-review)核心是为航空用户及行业提供最新的航空信息服务发行动态，助力其掌握可能影响空中交通服务航线网络变化的信息；该服务通过实时更新，涵盖ECAC成员国及周边国家3个AIRAC周期的参考文档信息，主要是各国AIP AMDT更新情况。\n绿色表示航路之外的修订，包括进离场程序\n黄色表示ATS航路或FRA修订\n红色表示待确认\nNIL表示没有修订\n此页面可供导航数据库修订提交前参考：需核对涉及国家的修订情况，至少要确保公司AIP订阅内容与此页面一致；同时需查阅各国/地区发布的TRIGGER NOTAM，确认已获取最新修订文件更新。",
+      "tags": [],
       "issueNumber": 4,
       "issueUrl": "https://github.com/abgrvw/minimal-personal-blog/issues/4"
     },
@@ -22,6 +23,7 @@
       "title": "美国机场消防等级查询指南",
       "date": "2026-11-21 · 1 min read",
       "body": "### Step 1\n登录[FAA](https://www.faa.gov/)网站，按照 Airports - Airport Safety 找到 [Aircraft Rescue and Fire Fighting (ARFF)](https://www.faa.gov/airports/airport_safety/aircraft_rescue_fire_fighting)。\n\n### Step 2\n进入相关页面后会发现涉及的文件特别多，什么都不用看，直接网页往下拉就可以看到 Part 139 Airports and Requirements 这部分。\n\n### Step 3\n只是查询某机场消防等级，那直接点击[Part 139 Airport Certification Status List](https://www.faa.gov/airports/airport_safety/part139_cert/part_139_airport_certification_status_list) ，点击进入之后会下载一个相关Excel表格。\n\n### Step 4\n有时一些机场会因夜间无宽体航班、大型飞机当日停飞或消防车辆或人员短时不可用，发布临时降级的NOTAM，如涉及不正常航班（如备降到不常用备降场）还需要查询NOTAM，防止机场消防等级不满足飞机最低运行要求。\n\n### Step 5\n其他内容点击具体条款查看即可。例如[139.315](https://www.ecfr.gov/current/title-14/chapter-I/subchapter-G/part-139/subpart-D/section-139.315)定义了各等级（Index A–E）如何根据飞机长度和起降架次确定消防等级。",
+      "tags": [],
       "issueNumber": 3,
       "issueUrl": "https://github.com/abgrvw/minimal-personal-blog/issues/3"
     },
@@ -30,6 +32,7 @@
       "title": "PAFA 塔台及终端雷达进近管制临时调整运行时间",
       "date": "2026-11-21 · 2 min read",
       "body": "根据FAA安克雷奇区域管制中心（Anchorage ARTCC）交通管理官泰勒·布莱克威尔（Tyler Blackwell）于2026年10月15日向空中交通管制系统指挥中心（ATCSCC）发布的备忘录，费尔班克斯国际机场塔台及终端雷达进近管制（FAI Tower/TRACON）将临时调整日常运行时间。   \n**运营时间调整自2026年10月18日起，直至另行通知，FAI塔台及终端雷达进近管制将由原本的24小时全天候运行，临时调整为每日阿拉斯加当地时间06:00至22:00运行。在每日22:00至次日06:00的关闭时段内，费尔班克斯国际机场将作为无塔台机场运行。**   \n### 关闭时段（22:00 - 06:00）的运行影响与替代方案\n在每日塔台关闭期间，飞行员及航空运营方需特别注意以下运行变化：\n### IFR服务\n\n- FAI塔台及终端雷达进近管制服务暂停，转由安克雷奇区域管制中心提供IFR进离场管制服务，包括进近和离场许可。\n- 由于安克雷奇区域管制中心在FAI地面缺乏可靠的甚高频（VHF）信号覆盖，IFR离场许可和取消信息将通过FAI飞行服务站（FSS）使用 122.2 MHz 频率进行中继转发。\n\n### 本地交通协调与气象信息获取\n\n- FAI飞行服务站（FSS）无法在通用交通咨询频率（CTAF 118.3 MHz）上进行收发。飞行员需自行使用CTAF进行本地交通协调，并获取机场运营部门关于机场施工及除雪作业的信息。\n- FAI自动地面气象观测系统（ASOS）不具备语音广播功能，实时气象观测信息需通过无线电向安克雷奇区域管制中心或FAI飞行服务站获取。\n### 助航灯光与进近程序限制\n- 飞行员控制跑道和进近灯光系统（PCL）将不可用，灯光亮度将根据终端机场预报（TAF）中的气象条件预设为所需的最高强度。\n- 更改 ILS 配置及进近灯光设置的能力将受到限制。\n- 由于无法支持所需的发电机运行，II类/III类精密进近程序将暂停使用。\n\n### 航班延误评估与信息通报\nFAA评估认为，此次运营时间调整预计不会造成航班延误，也无需采取交通管理措施（TMI）或进行飞行校验（Flight Check）。此外，自动终端情报服务（ATIS）将向飞行员播报FAI塔台/TRACON关闭的相关信息以及进离场和IFR取消指引；航行通告（NOTAM）也将明确告知关闭时段内D类空域（Class D）空中交通管制服务不可用的情况。 \n\n> !FAI 11/064 FAI SVC TWR CLSD TWR 118.3 NOW CTAF CLASS D TERMINAL RADAR SERVICE AREA SER INVOLVING VFR ACFT NOT AVBL CTC FAIRBANKS FSS FOR CLR DELIVERY ON 122.2 DLY 0700-1500 2611020700-2703141500",
+      "tags": [],
       "issueNumber": 2,
       "issueUrl": "https://github.com/abgrvw/minimal-personal-blog/issues/2"
     }
