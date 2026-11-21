@@ -134,7 +134,6 @@ function renderHome(data) {
   }).join('');
 
   return ''
-    + '<img class="avatar" src="' + esc(data.avatar || 'assets/avatar.svg') + '" alt="Portrait">'
     + '<h1>' + esc(data.siteName) + '</h1>'
     + '<section id="writings"><h2 class="h-writings">日记</h2><ul class="link-list">' + writings + '</ul></section>';
 }
