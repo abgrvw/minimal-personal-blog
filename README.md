@@ -1,5 +1,4 @@
-# 静态个人博客（仿 ivanhzhao.notion.site）
-
+# 静态个人博客
 零依赖静态个人站：单栏窄排版、头像 + 姓名、Writings / Photos / About 彩色小标题，深浅主题自适应。所有内容集中在 `content.json`，页面运行时读取它。
 
 **线上地址（Vercel 免费域名）：** https://minimal-personal-blog-coral.vercel.app
