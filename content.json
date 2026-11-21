@@ -11,9 +11,9 @@
   "writings": [
     {
       "slug": "workflow-smoke-test",
-      "title": "Workflow smoke test post",
+      "title": "Workflow smoke test post (edited)",
       "date": "2026-11-21 · 1 min read",
-      "body": "This paragraph proves **bold**, *italic*, `code`, and a [link](https://example.com) all render.\n\n## Heading\n\n- first bullet\n- second bullet\n\n1. numbered one\n2. numbered two\n\n> a quoted line\n\n```\nhello from an issue\n```\n\n— Smoke Test",
+      "body": "Edited body: this should replace the old content online.\n\n- update check",
       "issueNumber": 1,
       "issueUrl": "https://github.com/abgrvw/minimal-personal-blog/issues/1"
     },
