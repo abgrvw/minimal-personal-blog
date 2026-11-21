@@ -1,0 +1,59 @@
+{
+  "siteName": "Your Name",
+  "avatar": "assets/avatar.svg",
+  "bio": "Your Name is a curious human, maker, and observer, based in Shanghai.",
+  "quote": "“We see things not as they are, but as we are” — Anaïs Nin.",
+  "social": {
+    "github": "@your-handle",
+    "x": "@your-handle",
+    "email": "hello@example.com"
+  },
+  "writings": [
+    {
+      "slug": "notes-on-making",
+      "title": "Notes on Making Things",
+      "date": "2026-11-21 · 5 min read",
+      "body": "A few scattered observations on why we build, and what building gives back.\n\n1. The world does not care whether we make something. That is not a reason to stop; it is the reason we are free to start.\n2. People care. Even a small audience turns a private thought into a shared object.\n3. Every maker wants the same thing: to leave a small arrangement of the world slightly more intelligible than they found it.\n4. The attempt is bounded by a lifetime and by the tools at hand. Tools are the part we can pass on.\n5. A chair is an argument about sitting. A website is an argument about attention. Every artifact quietly makes a claim.\n6. Good tools disappear. You notice the work, not the hammer, not the page.\n7. Bad tools demand to be noticed, and that is how you know they are in the way.\n8. Language is a tool for thought, not just a report on thought. Write to find out what you mean.\n9. Publishing is a kind of courage: the moment a note becomes answerable to someone else.\n10. Most ideas survive contact with other people only if they are simple enough to be misunderstood and still useful.\n11. Making slowly is not the same as making less. It is often the only way to make something that lasts.\n12. And here comes AI — another tool, another amplifier, another reason to be precise about what we actually care about.\n\n— Your Name, 2026"
+    },
+    {
+      "slug": "field-guide-attention",
+      "title": "A Field Guide to Attention",
+      "date": "2026-10-02 · 3 min read",
+      "body": "A short checklist for keeping your mind in the room.\n\nAttention is the one currency we spend without ever seeing the balance. These are the small rules that have survived for me.\n\n1. Begin with one page, not one day. A day is too large to be honest about.\n2. Keep a notebook for thoughts you are not ready to publish. Most of them deserve that kindness.\n3. When a tool asks for a choice you did not intend to make, close the tool.\n4. Walk without headphones once a week. The world has a low hum worth hearing.\n5. Finish something small before starting something ambitious. Momentum is cheaper than motivation.\n6. At the end of the day, write one sentence about what actually happened.\n\n— Your Name, 2026"
+    }
+  ],
+  "albums": [
+    {
+      "name": "City Walks",
+      "photos": [
+        { "src": "assets/photo-1.svg", "caption": "Rooftops, 18:40" },
+        { "src": "assets/photo-2.svg", "caption": "Corner store" },
+        { "src": "assets/photo-3.svg", "caption": "Crossing, rain" }
+      ]
+    },
+    {
+      "name": "Quiet Light",
+      "photos": [
+        { "src": "assets/photo-4.svg", "caption": "Window, 07:12" },
+        { "src": "assets/photo-5.svg", "caption": "Blinds" },
+        { "src": "assets/photo-6.svg", "caption": "Last light" }
+      ]
+    },
+    {
+      "name": "People Watching",
+      "photos": [
+        { "src": "assets/photo-7.svg", "caption": "Two figures" },
+        { "src": "assets/photo-8.svg", "caption": "On the train" },
+        { "src": "assets/photo-9.svg", "caption": "Wait" }
+      ]
+    },
+    {
+      "name": "Elsewhere",
+      "photos": [
+        { "src": "assets/photo-10.svg", "caption": "Far away" },
+        { "src": "assets/photo-11.svg", "caption": "The sea" },
+        { "src": "assets/photo-12.svg", "caption": "Road, no traffic" }
+      ]
+    }
+  ]
+}

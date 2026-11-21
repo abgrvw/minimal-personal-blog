@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>网站内容编辑器</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #191919; color: #e8e8e6; font: 14px/1.6 -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif; }
+  button, input, textarea, select { font: inherit; }
+  .bar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 14px; padding: 12px 18px; background: #202020; border-bottom: 1px solid #333; }
+  .bar strong { font-size: 15px; }
+  .bar .actions { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+  .bar button, .mini, .pbtn, select { background: #303030; color: #e8e8e6; border: 1px solid #454545; border-radius: 5px; padding: 6px 11px; cursor: pointer; }
+  .bar button:hover, .mini:hover, .pbtn:hover, select:hover { background: #3b3b3b; }
+  .bar button.primary { background: #2f7fbf; border-color: #2f7fbf; color: #fff; }
+  #status { color: #8b8b88; font-size: 12px; }
+  .notice { padding: 9px 18px; background: #232323; color: #aaa; font-size: 12px; border-bottom: 1px solid #2c2c2c; }
+  .wrap { display: grid; grid-template-columns: 460px 1fr; height: calc(100vh - 92px); }
+  .form-pane { overflow: auto; padding: 18px; border-right: 1px solid #333; }
+  .preview-pane { display: flex; flex-direction: column; min-width: 0; background: #111; }
+  .preview-bar { display: flex; align-items: center; gap: 8px; padding: 9px 14px; background: #202020; border-bottom: 1px solid #333; }
+  .pbtn.active { background: #2f7fbf; border-color: #2f7fbf; color: #fff; }
+  #previewSlug { margin-left: auto; max-width: 220px; }
+  iframe { flex: 1; width: 100%; border: 0; background: #fff; }
+  h3 { margin: 22px 0 10px; font-size: 13px; color: #6ba9e0; letter-spacing: .04em; }
+  h3:first-child { margin-top: 4px; }
+  label { display: block; margin: 8px 0; color: #a8a8a5; font-size: 12px; }
+  input, textarea, select { display: block; width: 100%; margin-top: 4px; background: #262626; color: #e8e8e6; border: 1px solid #444; border-radius: 5px; padding: 7px 9px; outline: none; }
+  input:focus, textarea:focus { border-color: #6ba9e0; }
+  textarea { resize: vertical; }
+  .row-card { padding: 12px; margin: 10px 0; background: #212121; border: 1px solid #363636; border-radius: 7px; }
+  .row-head { display: flex; align-items: center; margin-bottom: 4px; }
+  .row-head strong { font-size: 12px; color: #ddd; }
+  .row-head .mini { margin-left: auto; }
+  .mini { padding: 3px 8px; font-size: 11px; }
+  .photo-row { display: grid; grid-template-columns: 1fr 1fr 28px; gap: 6px; align-items: end; margin: 6px 0; }
+  .photo-row input { margin: 0; }
+  .photo-row .mini { padding: 6px 0; text-align: center; }
+  .tip { color: #777; font-size: 11px; margin: 4px 0 0; }
+  @media (max-width: 900px) { .wrap { grid-template-columns: 1fr; height: auto; } .preview-pane { height: 70vh; } }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <strong>网站内容编辑器</strong>
+  <span id="status">未连接项目文件夹</span>
+  <div class="actions">
+    <button id="connectBtn">① 连接项目文件夹</button>
+    <button id="saveBtn" class="primary">② 保存到项目</button>
+    <button id="downloadBtn">下载 content.json</button>
+  </div>
+</div>
+<div class="notice" id="notice">首次使用：点「连接项目文件夹」，选择 vercel-blog 目录并允许写入。之后会自动记住，不用再选。改完点「保存到项目」，最后双击「更新到Vercel.command」发布。</div>
+
+<div class="wrap">
+  <section class="form-pane" id="formPane">
+    <h3>基本信息</h3>
+    <label>网站名 / 你的名字<input id="siteName"></label>
+    <label>头像路径<input id="avatar" placeholder="assets/avatar.svg"></label>
+    <label>自我介绍<input id="bio"></label>
+    <label>引言<input id="quote"></label>
+    <label>GitHub<input id="github" placeholder="@your-handle"></label>
+    <label>X / Twitter<input id="x" placeholder="@your-handle"></label>
+    <label>邮箱<input id="email" placeholder="hello@example.com"></label>
+
+    <h3>文章</h3>
+    <div id="writingsRows"></div>
+    <button class="mini" id="addWriting">+ 添加文章</button>
+
+    <h3>相册</h3>
+    <div id="albumsRows"></div>
+    <button class="mini" id="addAlbum">+ 添加相册</button>
+    <p class="tip">提示：正文里空一行表示分段；如果每一段都以「1. 2. 3.」开头，会自动排成编号列表。照片路径可用 assets/ 下的本地文件，也可填完整网址。</p>
+  </section>
+
+  <section class="preview-pane">
+    <div class="preview-bar">
+      <button class="pbtn active" data-preview="home">首页</button>
+      <button class="pbtn" data-preview="post">文章</button>
+      <button class="pbtn" data-preview="photos">相册</button>
+      <select id="previewSlug"></select>
+    </div>
+    <iframe id="preview" title="实时预览"></iframe>
+  </section>
+</div>
+
+<script src="assets/render.js"></script>
+<script>
+(function () {
+  var $ = function (s) { return document.querySelector(s); };
+  var data = null, dirHandle = null, previewPage = 'home', previewSlug = '';
+  var statusEl = $('#status'), noticeEl = $('#notice');
+
+  function setStatus(text, bad) {
+    statusEl.textContent = text;
+    statusEl.style.color = bad ? '#ea7773' : '#8b8b88';
+  }
+
+  /* ---- IndexedDB: remember the folder handle ---- */
+  function openDB() {
+    return new Promise(function (resolve, reject) {
+      var req = indexedDB.open('blog-editor', 1);
+      req.onupgradeneeded = function () { req.result.createObjectStore('handles'); };
+      req.onsuccess = function () { resolve(req.result); };
+      req.onerror = function () { reject(req.error); };
+    });
+  }
+  async function saveHandle(handle) {
+    var db = await openDB();
+    return new Promise(function (resolve, reject) {
+      var tx = db.transaction('handles', 'readwrite');
+      tx.objectStore('handles').put(handle, 'dir');
+      tx.oncomplete = resolve; tx.onerror = function () { reject(tx.error); };
+    });
+  }
+  async function loadHandle() {
+    var db = await openDB();
+    return new Promise(function (resolve) {
+      var tx = db.transaction('handles', 'readonly');
+      var req = tx.objectStore('handles').get('dir');
+      req.onsuccess = function () { resolve(req.result || null); };
+      req.onerror = function () { resolve(null); };
+    });
+  }
+
+  /* ---- form <-> data ---- */
+  function syncFromDOM() {
+    if (!data) return;
+    data.siteName = $('#siteName').value;
+    data.avatar = $('#avatar').value;
+    data.bio = $('#bio').value;
+    data.quote = $('#quote').value;
+    data.social = { github: $('#github').value, x: $('#x').value, email: $('#email').value };
+
+    data.writings = Array.prototype.map.call(document.querySelectorAll('#writingsRows .row-card'), function (row) {
+      return {
+        slug: row.querySelector('[data-field="slug"]').value,
+        title: row.querySelector('[data-field="title"]').value,
+        date: row.querySelector('[data-field="date"]').value,
+        body: row.querySelector('[data-field="body"]').value
+      };
+    });
+
+    data.albums = Array.prototype.map.call(document.querySelectorAll('#albumsRows .row-card'), function (row) {
+      return {
+        name: row.querySelector('[data-field="albumName"]').value,
+        photos: Array.prototype.map.call(row.querySelectorAll('.photo-row'), function (p) {
+          return {
+            src: p.querySelector('[data-field="src"]').value,
+            caption: p.querySelector('[data-field="caption"]').value
+          };
+        })
+      };
+    });
+  }
+
+  function renderBasicForm() {
+    $('#siteName').value = data.siteName || '';
+    $('#avatar').value = data.avatar || '';
+    $('#bio').value = data.bio || '';
+    $('#quote').value = data.quote || '';
+    $('#github').value = (data.social || {}).github || '';
+    $('#x').value = (data.social || {}).x || '';
+    $('#email').value = (data.social || {}).email || '';
+  }
+
+  function renderWritingsForm() {
+    $('#writingsRows').innerHTML = (data.writings || []).map(function (w, i) {
+      return '<div class="row-card" data-i="' + i + '">'
+        + '<div class="row-head"><strong>文章 ' + (i + 1) + '</strong><button class="mini remove-writing" data-i="' + i + '">删除</button></div>'
+        + '<label>标题<input data-field="title" value="' + esc(w.title) + '"></label>'
+        + '<label>slug（英文短名，用于网址）<input data-field="slug" value="' + esc(w.slug) + '"></label>'
+        + '<label>日期 / 阅读时长<input data-field="date" value="' + esc(w.date) + '"></label>'
+        + '<label>正文<textarea data-field="body" rows="9">' + esc(w.body) + '</textarea></label>'
+        + '</div>';
+    }).join('');
+    updateSlugOptions();
+  }
+
+  function renderAlbumsForm() {
+    $('#albumsRows').innerHTML = (data.albums || []).map(function (a, i) {
+      var photos = (a.photos || []).map(function (p, j) {
+        return '<div class="photo-row">'
+          + '<input data-field="src" value="' + esc(p.src) + '" placeholder="assets/photo-1.svg">'
+          + '<input data-field="caption" value="' + esc(p.caption) + '" placeholder="图片说明">'
+          + '<button class="mini remove-photo" data-i="' + i + '" data-j="' + j + '">×</button></div>';
+      }).join('');
+      return '<div class="row-card" data-i="' + i + '">'
+        + '<div class="row-head"><strong>相册 ' + (i + 1) + '</strong><button class="mini remove-album" data-i="' + i + '">删除</button></div>'
+        + '<label>相册名<input data-field="albumName" value="' + esc(a.name) + '"></label>'
+        + '<div class="photos">' + photos + '</div>'
+        + '<button class="mini add-photo" data-i="' + i + '">+ 添加照片</button>'
+        + '</div>';
+    }).join('');
+  }
+
+  function updateSlugOptions() {
+    var sel = $('#previewSlug');
+    var old = sel.value || previewSlug;
+    sel.innerHTML = (data.writings || []).map(function (w) {
+      return '<option value="' + esc(w.slug) + '">' + esc(w.title) + '</option>';
+    }).join('');
+    if (old && (data.writings || []).some(function (w) { return w.slug === old; })) sel.value = old;
+    previewSlug = sel.value;
+  }
+
+  /* ---- live preview ---- */
+  function updatePreview() {
+    if (!data) return;
+    var d = JSON.parse(JSON.stringify(data));
+    var origin = location.origin;
+    var payload = JSON.stringify(d).replace(/</g, '\\u003c');
+    var html = '<!doctype html><html><head><meta charset="utf-8">'
+      + '<link rel="stylesheet" href="' + origin + '/assets/style.css"></head><body>'
+      + '<header class="topbar"><a class="topbar-brand" href="#" data-brand></a>'
+      + '<nav data-nav></nav><button class="theme-toggle">◐</button></header>'
+      + '<main class="page"><div class="column" id="app"></div></main>'
+      + '<footer class="footer"><div class="footer-inner" data-footer></div></footer>'
+      + '<script src="' + origin + '/assets/render.js"><\/script>'
+      + '<script>renderAll(' + payload + ',"' + previewPage + '",' + JSON.stringify(previewSlug) + ');<\/script>'
+      + '</body></html>';
+    $('#preview').srcdoc = html;
+  }
+
+  function refreshAll() { renderBasicForm(); renderWritingsForm(); renderAlbumsForm(); updatePreview(); }
+
+  /* ---- events ---- */
+  $('#formPane').addEventListener('input', function () { syncFromDOM(); updatePreview(); });
+
+  $('#writingsRows').addEventListener('click', function (e) {
+    syncFromDOM();
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    var i = Number(btn.dataset.i);
+    if (btn.classList.contains('remove-writing')) data.writings.splice(i, 1);
+    renderWritingsForm(); updatePreview();
+  });
+
+  $('#addWriting').addEventListener('click', function () {
+    syncFromDOM();
+    data.writings.push({ slug: 'new-post-' + Date.now().toString(36), title: '新文章标题', date: '2026-01-01', body: '第一段简介。\n\n1. 第一点\n2. 第二点\n\n— ' + (data.siteName || 'Your Name') + ', 2026' });
+    renderWritingsForm(); updatePreview();
+  });
+
+  $('#albumsRows').addEventListener('click', function (e) {
+    syncFromDOM();
+    var btn = e.target.closest('button');
+    if (!btn) return;
+    var i = Number(btn.dataset.i);
+    if (btn.classList.contains('remove-album')) data.albums.splice(i, 1);
+    else if (btn.classList.contains('remove-photo')) data.albums[i].photos.splice(Number(btn.dataset.j), 1);
+    else if (btn.classList.contains('add-photo')) data.albums[i].photos.push({ src: 'assets/photo-1.svg', caption: '新照片说明' });
+    renderAlbumsForm(); updatePreview();
+  });
+
+  $('#addAlbum').addEventListener('click', function () {
+    syncFromDOM();
+    data.albums.push({ name: '新相册', photos: [{ src: 'assets/photo-1.svg', caption: '照片说明' }] });
+    renderAlbumsForm(); updatePreview();
+  });
+
+  document.querySelectorAll('.pbtn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.pbtn').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      previewPage = btn.dataset.preview;
+      updatePreview();
+    });
+  });
+  $('#previewSlug').addEventListener('change', function () { previewSlug = this.value; updatePreview(); });
+
+  $('#connectBtn').addEventListener('click', async function () {
+    if (!window.showDirectoryPicker) {
+      setStatus('当前浏览器不支持，请用 Chrome / Edge 打开', true);
+      return;
+    }
+    try {
+      dirHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
+      await saveHandle(dirHandle);
+      setStatus('已连接：' + dirHandle.name);
+      noticeEl.textContent = '已连接项目文件夹。修改左侧表单，右侧实时预览；点「保存到项目」写入 content.json，再双击「更新到Vercel.command」发布。';
+    } catch (e) {
+      setStatus('连接取消：' + (e.message || e.name), true);
+    }
+  });
+
+  $('#saveBtn').addEventListener('click', async function () {
+    syncFromDOM();
+    if (!dirHandle) { setStatus('请先点「连接项目文件夹」', true); return; }
+    try {
+      var fh = await dirHandle.getFileHandle('content.json', { create: true });
+      var w = await fh.createWritable();
+      await w.write(JSON.stringify(data, null, 2) + '\n');
+      await w.close();
+      setStatus('已保存 content.json ✓');
+    } catch (e) {
+      setStatus('保存失败：' + (e.message || e.name), true);
+    }
+  });
+
+  $('#downloadBtn').addEventListener('click', function () {
+    syncFromDOM();
+    var blob = new Blob([JSON.stringify(data, null, 2) + '\n'], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'content.json';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    setStatus('已下载 content.json，请手动放到项目目录');
+  });
+
+  /* ---- init ---- */
+  (async function () {
+    try {
+      var h = await loadHandle();
+      if (h && h.queryPermission) {
+        var perm = await h.queryPermission({ mode: 'readwrite' });
+        if (perm === 'granted') { dirHandle = h; setStatus('已连接：' + h.name); }
+      }
+    } catch (e) { /* ignore */ }
+
+    try {
+      var r = await fetch('content.json', { cache: 'no-store' });
+      data = await r.json();
+      refreshAll();
+    } catch (e) {
+      noticeEl.textContent = '读取 content.json 失败。请双击项目目录里的「编辑网站.command」启动本地服务后再打开本页，不要直接用 file:// 打开。';
+      setStatus('需要本地服务', true);
+    }
+  })();
+})();
+</script>
+</body>
+</html>
