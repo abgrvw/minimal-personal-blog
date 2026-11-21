@@ -3,7 +3,7 @@
 零依赖静态个人站：单栏窄排版、头像 + 姓名、Writings / Photos / About 彩色小标题，深浅主题自适应。所有内容集中在 `content.json`，页面运行时读取它。
 
 **线上地址（Vercel 免费域名）：** https://minimal-personal-blog-coral.vercel.app
-**GitHub 仓库：** 待创建（创建后写入）
+**GitHub 仓库：** https://github.com/abgrvw/minimal-personal-blog
 
 ## 日常更新：GitHub 方式（推荐）
 
