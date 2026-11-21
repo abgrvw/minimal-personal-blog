@@ -173,7 +173,12 @@ function renderAll(data, page, slug) {
   var nav = document.querySelector('[data-nav]');
   if (nav) {
     nav.innerHTML = '<a href="index.html">Home</a>'
-      + '<a href="index.html#writings">日记</a>';
+      + '<a href="index.html#writings">日记</a>'
+      + '<button class="search-toggle" type="button" title="Search (⌘K)" aria-label="搜索日记" data-search-toggle>'
+      + '<svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true">'
+      + '<circle cx="7" cy="7" r="4.4" fill="none" stroke="currentColor" stroke-width="1.4"/>'
+      + '<line x1="10.3" y1="10.3" x2="14" y2="14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>'
+      + '</svg></button>';
   }
 
   var app = document.getElementById('app');
