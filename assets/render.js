@@ -149,8 +149,6 @@ function renderPost(data, slug) {
     + '<article><h1>' + esc(post.title) + '</h1>'
     + '<p class="meta">' + esc(post.date) + '</p>'
     + markdownBlocks(post.body).join('\n')
-    + (post.issueUrl ? '<p class="edit-link"><a href="' + esc(post.issueUrl)
-      + '" target="_blank" rel="noopener">Edit this post on GitHub →</a></p>' : '')
     + '</article>';
 }
 
