@@ -10,6 +10,14 @@
   },
   "writings": [
     {
+      "slug": "issue-3",
+      "title": "美国机场消防等级查询指南",
+      "date": "2026-11-21 · 1 min read",
+      "body": "### Step 1\n登录[FAA](https://www.faa.gov/)网站，按照 Airports - Airport Safety 找到 [Aircraft Rescue and Fire Fighting (ARFF)](https://www.faa.gov/airports/airport_safety/aircraft_rescue_fire_fighting)。\n\n### Step 2\n进入相关页面后会发现涉及的文件特别多，什么都不用看，直接网页往下拉就可以看到 Part 139 Airports and Requirements 这部分。\n\n### Step 3\n只是查询某机场消防等级，那直接点击[Part 139 Airport Certification Status List](https://www.faa.gov/airports/airport_safety/part139_cert/part_139_airport_certification_status_list) ，点击进入之后会下载一个相关Excel表格。\n\n### Step 4\n有时一些机场会因夜间无宽体航班、大型飞机当日停飞或消防车辆或人员短时不可用，发布临时降级的NOTAM，如涉及不正常航班（如备降到不常用备降场）还需要查询NOTAM，防止机场消防等级不满足飞机最低运行要求。\n\n### Step 5\n其他内容点击具体条款查看即可。例如[139.315](https://www.ecfr.gov/current/title-14/chapter-I/subchapter-G/part-139/subpart-D/section-139.315)定义了各等级（Index A–E）如何根据飞机长度和起降架次确定消防等级。",
+      "issueNumber": 3,
+      "issueUrl": "https://github.com/abgrvw/minimal-personal-blog/issues/3"
+    },
+    {
       "slug": "issue-2",
       "title": "PAFA 塔台及终端雷达进近管制临时调整运行时间",
       "date": "2026-11-21 · 2 min read",
