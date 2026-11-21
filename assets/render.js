@@ -130,7 +130,7 @@ function profileUrl(kind, value) {
 function renderHome(data) {
   var writings = (data.writings || []).map(function (w) {
     return '<li><a href="post.html?slug=' + encodeURIComponent(w.slug || '') + '">'
-      + '<span class="icon">📄</span>' + esc(w.title) + '</a></li>';
+      + esc(w.title) + '</a></li>';
   }).join('');
 
   return ''
