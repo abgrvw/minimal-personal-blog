@@ -133,26 +133,10 @@ function renderHome(data) {
       + '<span class="icon">📄</span>' + esc(w.title) + '</a></li>';
   }).join('');
 
-  var albums = (data.albums || []).map(function (a, i) {
-    return '<li><a href="photos.html#album-' + i + '"><span class="icon">'
-      + (i + 1) + '️⃣</span>' + esc(a.name) + '</a></li>';
-  }).join('');
-
-  var s = data.social || {};
   return ''
     + '<img class="avatar" src="' + esc(data.avatar || 'assets/avatar.svg') + '" alt="Portrait">'
     + '<h1>' + esc(data.siteName) + '</h1>'
-    + '<section id="writings"><h2 class="h-writings">Writings</h2><ul class="link-list">' + writings + '</ul></section>'
-    + '<section><h2 class="h-photos">Photos</h2><ul class="link-list">' + albums + '</ul></section>'
-    + '<section id="about">'
-    + '<h2 class="h-about">About</h2>'
-    + '<p class="bio">' + esc(data.bio) + '</p>'
-    + '<p class="quote">' + esc(data.quote) + '</p>'
-    + '<div class="social">'
-    + '<p>GitHub: <a href="' + esc(profileUrl('github', s.github)) + '" target="_blank" rel="me">' + esc(s.github) + '</a></p>'
-    + '<p>X / Twitter: <a href="' + esc(profileUrl('x', s.x)) + '" target="_blank" rel="me">' + esc(s.x) + '</a></p>'
-    + '<p>Email: <a href="mailto:' + esc(s.email) + '">' + esc(s.email) + '</a></p>'
-    + '</div></section>';
+    + '<section id="writings"><h2 class="h-writings">日记</h2><ul class="link-list">' + writings + '</ul></section>';
 }
 
 function renderPost(data, slug) {
@@ -192,9 +176,7 @@ function renderAll(data, page, slug) {
   var nav = document.querySelector('[data-nav]');
   if (nav) {
     nav.innerHTML = '<a href="index.html">Home</a>'
-      + '<a href="index.html#writings">Writings</a>'
-      + '<a href="photos.html">Photos</a>'
-      + '<a href="index.html#about">About</a>';
+      + '<a href="index.html#writings">日记</a>';
   }
 
   var app = document.getElementById('app');
